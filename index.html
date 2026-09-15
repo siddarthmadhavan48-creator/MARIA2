@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For M ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+}
+
+.card {
+  width: 90%;
+  max-width: 430px;
+  padding: 35px 25px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+button {
+  border: none;
+  padding: 14px 25px;
+  margin: 10px;
+  border-radius: 30px;
+  font-size: 17px;
+  cursor: pointer;
+  background: white;
+  color: #ff4f81;
+  transition: .2s;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+.hidden {
+  display: none;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  font-size: 25px;
+  animation: floatUp 4s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+#finalMessage {
+  font-size: 22px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div id="page1">
+    <h1>Hey M ❤️</h1>
+
+    <p>
+      I made you something again...
+      <br><br>
+      apparently I have too much free time 😂
+    </p>
+
+    <button onclick="page2()">Do NOT press this</button>
+  </div>
+
+
+  <div id="page2" class="hidden">
+    <h1>Bruh 😭</h1>
+
+    <p>
+      I literally said DON'T press it.
+      <br><br>
+      You really don't listen to me huh?
+    </p>
+
+    <button onclick="page3()">Fine... press this one</button>
+  </div>
+
+
+  <div id="page3" class="hidden">
+    <h1>❤️</h1>
+
+    <p>
+      I just wanted to remind you...
+      <br><br>
+      I really like spending time with you :)
+    </p>
+
+    <button onclick="page4()">One more thing...</button>
+  </div>
+
+
+  <div id="page4" class="hidden">
+    <h1>Important Question</h1>
+
+    <p>How much do you like me? 🤨</p>
+
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="100"
+      id="loveSlider"
+      style="width:80%;"
+      oninput="fixSlider()"
+    >
+
+    <p id="sliderText">A LOT ❤️</p>
+
+    <button onclick="finish()">Submit extremely unbiased answer</button>
+  </div>
+
+
+  <div id="page5" class="hidden">
+    <h1>HAHA I KNEW IT 😌</h1>
+
+    <p id="finalMessage">
+      Okay that's enough cringe for today.
+      <br><br>
+      I like you M ❤️
+    </p>
+  </div>
+
+</div>
+
+
+<script>
+
+function show(page) {
+  document.querySelectorAll(".card > div").forEach(div => {
+    div.classList.add("hidden");
+  });
+
+  document.getElementById(page).classList.remove("hidden");
+}
+
+function page2() {
+  show("page2");
+}
+
+function page3() {
+  show("page3");
+  hearts();
+}
+
+function page4() {
+  show("page4");
+}
+
+function finish() {
+  show("page5");
+  hearts();
+  setTimeout(hearts, 700);
+  setTimeout(hearts, 1400);
+}
+
+function fixSlider() {
+  const slider = document.getElementById("loveSlider");
+
+  if (slider.value < 85) {
+    slider.value = 100;
+    document.getElementById("sliderText").innerText =
+      "Nice try 💀 A LOT ❤️";
+  } else {
+    document.getElementById("sliderText").innerText =
+      "A LOT ❤️";
+  }
+}
+
+function hearts() {
+
+  for (let i = 0; i < 25; i++) {
+
+    setTimeout(() => {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const hearts = ["❤️","💕","💗","💖"];
+      heart.innerText =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (20 + Math.random() * 25) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+
+    }, i * 100);
+  }
+}
+
+</script>
+
+</body>
+</html>
